@@ -15,9 +15,15 @@ public class ChatGptController {
         this.chatGptService = chatGptService;
     }
 
-    @PostMapping
+    @PostMapping("/ingredients")
     public String categorizeIngredient(@RequestBody String ingredient) {
         return chatGptService.categorizeIngredient(ingredient);
     }
+
+    @PostMapping("/recipe")
+    public String recipes(@RequestBody String ingredient) {
+        return chatGptService.recipes(ingredient);
+    }
+
 
 }

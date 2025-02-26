@@ -49,4 +49,23 @@ public class ChatGptService {
 
         return response.choices().get(0).message().content();
     }
+
+    public String recipes(String ingredient) {
+        String prompt = "Give me a tasty recipe for the following Ingredient: " + ingredient;
+
+        Message userMessage = new Message("user", prompt);
+        ChatGptRequest request = ChatGptRequest.builder()
+                .model("gpt-4o-mini")
+                .messages(List.of(userMessage))
+                .temperature(0.7)
+                .build();
+
+        ChatGptResponse response = restClient.post()
+                .body(request)
+                .retrieve()
+                .body(ChatGptResponse.class);
+
+        return response.choices().get(0).message().content();
+    }
+
 }
