@@ -1,6 +1,5 @@
 package org.example.chatgptapi.Service;
 
-import jakarta.servlet.http.HttpServletResponse;
 import org.example.chatgptapi.model.ChatGptRequest;
 import org.example.chatgptapi.model.ChatGptResponse;
 import org.example.chatgptapi.model.Message;
@@ -21,7 +20,6 @@ public class ChatGptService {
                 .defaultHeader("Authorization", "Bearer " + apiKey)
                 .build();
     }
-
 
     public String categorizeIngredient(String ingredient) {
         String prompt = """
@@ -47,7 +45,7 @@ public class ChatGptService {
                 .retrieve()
                 .body(ChatGptResponse.class);
 
-        return response.choices().get(0).message().content();
+        return response.retrieveResponse();
     }
 
     public String recipes(String ingredient) {
@@ -65,7 +63,7 @@ public class ChatGptService {
                 .retrieve()
                 .body(ChatGptResponse.class);
 
-        return response.choices().get(0).message().content();
+        return response.retrieveResponse();
     }
 
 }
